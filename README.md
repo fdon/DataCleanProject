@@ -22,7 +22,7 @@ Script *run_analysis.R* lists the following **steps** to analyze the raw data an
 
 	9.	save tinyDataset to a file
 	
-### The tinyDataset contains 180 observations of the following 88 variables
+### The tinyDataset contains 180 observations (6 activities X 30 subjects) of the following 88 variables:
 
 names(tinyDataset)
 
