@@ -2,72 +2,39 @@
 
 Raw data can be found [here](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
 
-Script *run_analysis.R* lists the following **steps** to analyze the raw data and generate file *tinyDataset.txt*
+Script *run_analysis.R* executes the following **steps** to analyze the raw data and generate file *tidyDataset.txt*
 
-	1.	read feature names
+	1.	read feature names; adjust the featureNames vector so as to *make variable names more descriptive*
 
 	2.	read training set
 
 	3.	read test set
 
-	4.	merge training and test sets
+	4.	*merge training and test sets*
 
-	5.	extract measurements on mean and standard deviation
+	5.	*extract measurements on mean and standard deviation*
 
 	6.	Label the data set with descriptive variable names
 
-	7.	Use descriptive activity names
+	7.	*Use descriptive activity names*
 
-	8.	create a tidy dataset with the average of each variable for each activity and each subject
+	8.	create a *tidy dataset with the average of each variable for each activity and each subject*
 
-	9.	save tinyDataset to a file
+	9.	save tidyDataset to a file
 	
-### The tinyDataset contains 180 observations (6 activities X 30 subjects) of the following 88 variables:
+	
+We can see that the tidyDataset is indeed "tidy" in the sense defined in Hadley Wickham's Tidy Data [paper](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html):
 
-names(tinyDataset)
+* Each variable forms a column.
 
-	[1] "Activity"                             "Subject"
-	[3] "tBodyAcc-mean()-X"                    "tBodyAcc-mean()-Y"
-	[5] "tBodyAcc-mean()-Z"                    "tBodyAcc-std()-X"
-	[7] "tBodyAcc-std()-Y"                     "tBodyAcc-std()-Z"
-	[9] "tGravityAcc-mean()-X"                 "tGravityAcc-mean()-Y"
-	[11] "tGravityAcc-mean()-Z"                 "tGravityAcc-std()-X"
-	[13] "tGravityAcc-std()-Y"                  "tGravityAcc-std()-Z"
-	[15] "tBodyAccJerk-mean()-X"                "tBodyAccJerk-mean()-Y"
-	[17] "tBodyAccJerk-mean()-Z"                "tBodyAccJerk-std()-X"
-	[19] "tBodyAccJerk-std()-Y"                 "tBodyAccJerk-std()-Z"
-	[21] "tBodyGyro-mean()-X"                   "tBodyGyro-mean()-Y"
-	[23] "tBodyGyro-mean()-Z"                   "tBodyGyro-std()-X"
-	[25] "tBodyGyro-std()-Y"                    "tBodyGyro-std()-Z"
-	[27] "tBodyGyroJerk-mean()-X"               "tBodyGyroJerk-mean()-Y"
-	[29] "tBodyGyroJerk-mean()-Z"               "tBodyGyroJerk-std()-X"
-	[31] "tBodyGyroJerk-std()-Y"                "tBodyGyroJerk-std()-Z"
-	[33] "tBodyAccMag-mean()"                   "tBodyAccMag-std()"
-	[35] "tGravityAccMag-mean()"                "tGravityAccMag-std()"
-	[37] "tBodyAccJerkMag-mean()"               "tBodyAccJerkMag-std()"
-	[39] "tBodyGyroMag-mean()"                  "tBodyGyroMag-std()"
-	[41] "tBodyGyroJerkMag-mean()"              "tBodyGyroJerkMag-std()"
-	[43] "fBodyAcc-mean()-X"                    "fBodyAcc-mean()-Y"
-	[45] "fBodyAcc-mean()-Z"                    "fBodyAcc-std()-X"
-	[47] "fBodyAcc-std()-Y"                     "fBodyAcc-std()-Z"
-	[49] "fBodyAcc-meanFreq()-X"                "fBodyAcc-meanFreq()-Y"
-	[51] "fBodyAcc-meanFreq()-Z"                "fBodyAccJerk-mean()-X"
-	[53] "fBodyAccJerk-mean()-Y"                "fBodyAccJerk-mean()-Z"
-	[55] "fBodyAccJerk-std()-X"                 "fBodyAccJerk-std()-Y"
-	[57] "fBodyAccJerk-std()-Z"                 "fBodyAccJerk-meanFreq()-X"
-	[59] "fBodyAccJerk-meanFreq()-Y"            "fBodyAccJerk-meanFreq()-Z"
-	[61] "fBodyGyro-mean()-X"                   "fBodyGyro-mean()-Y"
-	[63] "fBodyGyro-mean()-Z"                   "fBodyGyro-std()-X"
-	[65] "fBodyGyro-std()-Y"                    "fBodyGyro-std()-Z"
-	[67] "fBodyGyro-meanFreq()-X"               "fBodyGyro-meanFreq()-Y"
-	[69] "fBodyGyro-meanFreq()-Z"               "fBodyAccMag-mean()"
-	[71] "fBodyAccMag-std()"                    "fBodyAccMag-meanFreq()"
-	[73] "fBodyBodyAccJerkMag-mean()"           "fBodyBodyAccJerkMag-std()"
-	[75] "fBodyBodyAccJerkMag-meanFreq()"       "fBodyBodyGyroMag-mean()"
-	[77] "fBodyBodyGyroMag-std()"               "fBodyBodyGyroMag-meanFreq()"
-	[79] "fBodyBodyGyroJerkMag-mean()"          "fBodyBodyGyroJerkMag-std()"
-	[81] "fBodyBodyGyroJerkMag-meanFreq()"      "angle(tBodyAccMean,gravity)"
-	[83] "angle(tBodyAccJerkMean),gravityMean)" "angle(tBodyGyroMean,gravityMean)"
-	[85] "angle(tBodyGyroJerkMean,gravityMean)" "angle(X,gravityMean)"
-	[87] "angle(Y,gravityMean)"                 "angle(Z,gravityMean)"
+* Each observation forms a row.
 
+* Each type of observational unit forms a table.
+
+
+David Hood's [blog post](https://thoughtfulbloke.wordpress.com/2015/09/09/getting-and-cleaning-the-assignment/) also gives a useful checklist to verify the tidyness of the result:
+
+* Does it have headings so I know which columns are which?
+* Are the variables in different columns (depending on the wide/long form)?
+* Are there no duplicate columns?
+	

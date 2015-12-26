@@ -1,14 +1,16 @@
-#getwd()
-#setwd("C:/Users/Francois/Documents/R/getclean/Project")
-
-install.packages("dplyr")
 library(dplyr)
-#install.packages("tidyr")
-#library(tidyr)
 
 #read feature names
-features <- read.table("features.txt")
+features <- read.table("features.txt",stringsAsFactors = FALSE)
 featureNames <- features$V2
+
+#adjust the featureNames vector so as to make variable names more descriptive;
+#we will then use this adjusted vector to rename the variables V1..V561
+#in the training set and the test set.
+featureNames <- gsub("^t","Time",featureNames)
+featureNames <- gsub("Acc","Acceleration",featureNames)
+featureNames <- gsub("^f","FFT",featureNames)
+featureNames <- gsub("Mag","Magnitude",featureNames)
 
 #read training set
  
@@ -45,10 +47,6 @@ MeanStd <- grep(".*mean.*|.*std*",names(dataset),ignore.case=TRUE)
 colsToKeep <- c(1,2,MeanStd)
 dataset <- dataset[,colsToKeep]
 
-#Label the data set with descriptive variable names
-#Done with replacing variable names V1...V561 with feature names
-
-
 #Use descriptive activity names instead of 1..6
 
 dataset$Activity[dataset$Activity==1]<-"WALKING"
@@ -59,8 +57,8 @@ dataset$Activity[dataset$Activity==5]<-"STANDING"
 dataset$Activity[dataset$Activity==6]<-"LAYING"
 
 #create a tidy dataset with the average of each variable for each activity and each subject
-tinyDataset <- aggregate(.~Activity+Subject,dataset,mean)
-tinyDataset <- tinyDataset[order(tinyDataset$Activity,tinyDataset$Subject),]
+tidyDataset <- aggregate(.~Activity+Subject,dataset,mean)
+tidyDataset <- tidyDataset[order(tidyDataset$Activity,tidyDataset$Subject),]
 
-#save tinyDataset to a file
-write.table(tinyDataset,file="tinyDataset.txt", row.names=FALSE)
+#save tidyDataset to a file
+write.table(tidyDataset,file="tidyDataset.txt", row.names=FALSE)
