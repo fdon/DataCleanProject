@@ -1,8 +1,9 @@
 # DataCleanProject - Code Book
 
-### The tidyDataset contains 180 observations (6 activities X 30 subjects) of the following 88 variables:
+#### The tidyDataset contains 180 observations (6 activities X 30 subjects) of the following 88 variables:
 
 names(tidyDataset)
+
  [1] "Activity"                                       
  [2] "Subject"                                        
  [3] "TimeBodyAcceleration-mean()-X"                  
